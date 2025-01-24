@@ -5,9 +5,21 @@ public class Libro {
     private String autor;
     private int numeroPaginas;
     private String categoria;
+
+
+    public Libro(int idLibro, String titulo, String autor, int numeroPaginas, String categoria) {
+        this.idLibro = idLibro;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.numeroPaginas = numeroPaginas;
+        this.categoria = categoria;
+    }
+
     public int getIdLibro() {
         return idLibro;
     }
+
+
     public void setIdLibro(int idLibro) {
         this.idLibro = idLibro;
     }
