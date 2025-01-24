@@ -50,6 +50,44 @@ public class GestionLibros {
     }
 
     public void buscarLibro(ArrayList <Libro> libros){
-        System.out.println("Elige el valor por el que quieres buscar el libro:");
+        Scanner entrada=new Scanner(System.in);
+        System.out.println("Elige el valor por el que  quieres buscar el libro: \n"
+        +"1. Titulo \n"+"2. Autor \n"+"3. Categoria \n"+"Elige una opcion:");
+        int opcion=entrada.nextInt();
+
+        switch(opcion){
+            case 1:
+            System.out.println("Introduce un titulo:");
+            String titulo=entrada.next();
+                for (Libro libro : libros) {
+                    if (titulo.equalsIgnoreCase(libro.getTitulo())) {
+                        System.out.println(libro.toString());
+                    }
+                }
+                break;
+            case 2:
+                System.out.println("Introduce un autor:");
+                String autor=entrada.next();
+                for (Libro libro : libros) {
+                    if (autor.equalsIgnoreCase(libro.getAutor())) {
+                        System.out.println(libro.toString());
+                    }
+                }
+            break;
+            case 3:
+                System.out.println("Introduce una categoria:");
+                String categoria=entrada.next();
+                for (Libro libro : libros) {
+                    if (categoria.equalsIgnoreCase(libro.getCategoria())) {
+                        System.out.println(libro.toString());
+                    }
+                }
+            break;
+
+            default:
+            System.out.println("Esa opcion no es valida:");
+
+        }
+
     }
 }
