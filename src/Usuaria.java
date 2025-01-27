@@ -1,12 +1,12 @@
+
 public class Usuaria {
-    public class Usuario {
         private String nombre;
         private String email;
         private String contrasenia;
         private boolean esAdm;
 
 
-    public Usuario(String nombre, String email, String contrasenia, boolean esAdm ){
+public Usuaria(String nombre, String email, String contrasenia, boolean esAdm){
         this.nombre = nombre;
         this.email = email;
         this.contrasenia = contrasenia;
@@ -63,8 +63,6 @@ public class Usuaria {
     }
 
 
-
-
 }
 
-}
+
