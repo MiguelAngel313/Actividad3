@@ -1,41 +1,65 @@
 public class Usuario {
-    private int idUsuario;
-    private boolean admin;
-    private String nombre;
-    private int edad;
-    public Usuario(int idUsuario, boolean admin, String nombre, int edad) {
-        this.idUsuario = idUsuario;
-        this.admin = admin;
-        this.nombre = nombre;
-        this.edad = edad;
-    }
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-    public boolean isAdmin() {
-        return admin;
-    }
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
+        private String nombre;
+        private String email;
+        private String contrasenia;
+        private boolean esAdm;
+
+
+public Usuario(String nombre, String email, String contrasenia, boolean esAdm ){
+    this.nombre = nombre;
+    this.email = email;
+    this.contrasenia = contrasenia;
+    this.esAdm= esAdm;
+    
+}
+
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public int getEdad() {
-        return edad;
-    }
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-    @Override
-    public String toString() {
-        return "Usuario [idUsuario=" + idUsuario + ", admin=" + admin + ", nombre=" + nombre + ", edad=" + edad + "]";
+
+    public String getEmail() {
+        return this.email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContrasenia() {
+        return this.contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public boolean isEsAdm() {
+        return this.esAdm;
+    }
+
+    public boolean getEsAdm() {
+        return this.esAdm;
+    }
+
+    public void setEsAdm(boolean esAdm) {
+        this.esAdm = esAdm;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " nombre='" + nombre + "'" +
+            ", email='" + email + "'" +
+            ", contrasenia='" + contrasenia + "'" +
+            ", esAdm='" + esAdm + "'" +
+            "}";
+    }
+
+
+
 }
+
