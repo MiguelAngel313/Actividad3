@@ -4,10 +4,6 @@ import java.util.Scanner;
 public class GestionLibros {
 
     public Libro agregarLibrosNuevos(Usuario user) {
-
-        /*
-         * Implementar condicional que me permita controlar si el usuario es admin o no
-         */
         if (user.isAdmin()) {
 
             Scanner entrada = new Scanner(System.in);
@@ -28,13 +24,14 @@ public class GestionLibros {
 
             System.out.println("Introduce una categoria:");
             libro.setCategoria(entrada.next());
+            entrada.close();
             return libro;
         } else {
             return null;
         }
     }
 
-    public ArrayList eliminarLibrosExistentes(Usuario user, int idLibro, ArrayList<Libro> libros) {
+    public ArrayList<Libro> eliminarLibrosExistentes(Usuario user, int idLibro, ArrayList<Libro> libros) {
 
         if (user.isAdmin()) {
 
@@ -43,10 +40,8 @@ public class GestionLibros {
                     libros.remove(libro);
                 }
             }
-            return libros;
-        } else {
-            return null;
         }
+        return libros;
     }
 
     public void buscarLibro(ArrayList <Libro> libros){
@@ -88,6 +83,6 @@ public class GestionLibros {
             System.out.println("Esa opcion no es valida:");
 
         }
-
+        entrada.close();
     }
 }
