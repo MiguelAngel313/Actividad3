@@ -2,14 +2,14 @@ public class Usuario {
         private String nombre;
         private String email;
         private String contrasenia;
-        private boolean isAdmi;
+        private boolean isAdmin;
 
 
-public Usuario(String nombre, String email, String contrasenia, boolean isAdmi ){
+public Usuario(String nombre, String email, String contrasenia, boolean isAdmin ){
     this.nombre = nombre;
     this.email = email;
     this.contrasenia = contrasenia;
-    this.isAdmi= isAdmi;
+    this.isAdmin= isAdmin;
     
 }
 
@@ -37,16 +37,16 @@ public Usuario(String nombre, String email, String contrasenia, boolean isAdmi )
         this.contrasenia = contrasenia;
     }
 
-    public boolean isEsAdmi() {
-        return this.isAdmi;
+    public boolean isAdmin() {
+        return this.isAdmin;
     }
 
-    public boolean getEsAdmi() {
-        return this.isAdmi;
+    public boolean getAdmin() {
+        return this.isAdmin;
     }
 
-    public void setEsAdm(boolean isEsAdmi) {
-        this.isAdmi = isEsAdmi;
+    public void setEsAdm(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override
@@ -55,7 +55,7 @@ public Usuario(String nombre, String email, String contrasenia, boolean isAdmi )
             " nombre='" + nombre + "'" +
             ", email='" + email + "'" +
             ", contrasenia='" + contrasenia + "'" +
-            ", isAdm='" + isAdmi + "'" +
+            ", isAdmin='" + isAdmin() + "'" +
             "}";
     }
 
