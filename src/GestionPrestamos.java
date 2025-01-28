@@ -23,4 +23,6 @@ public void devolverLibroPrestado(ArrayList<Libro> libros, int id){
     }
 }
 
+//Implementar funcion de mostrar libros actualmente prestados
+
 }
