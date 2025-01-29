@@ -85,4 +85,10 @@ public class GestionLibros {
         }
         entrada.close();
     }
+
+    public void todosLosLibros(ArrayList<Libro> libros){
+        for (Libro libro : libros) {
+            System.out.println(libro.toString());
+        }
+    }
 }
