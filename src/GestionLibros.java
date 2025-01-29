@@ -8,7 +8,7 @@ public class GestionLibros {
 
             Scanner entrada = new Scanner(System.in);
 
-            Libro libro = new Libro(0, null, null, 0, null);
+            Libro libro = new Libro(0, null, null, 0, null, false, 0);
 
             System.out.println("Introduce un Id:");
             libro.setIdLibro(entrada.nextInt());
