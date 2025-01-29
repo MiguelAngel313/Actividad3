@@ -61,7 +61,7 @@ public class Biblioteca {
     }
 
     //Mostrar menú 
-    public static void mostrarMenu() {
+    public static void mostrarMenu1() {
         System.out.println("Menú Principal");
         System.out.println("1) Registrar Usuarios");
         System.out.println("2) Consultar Usuarios");
@@ -77,6 +77,15 @@ public class Biblioteca {
         }
 
         return teclado.nextInt();
+    }
+
+    public void mostrarMenu(){
+        System.out.println("Elige una opcion \n"
+        +"1. Gestionar Libros \n"
+        +"2. Gestionar Usuarios \n"
+        +"3. Gestionar Prestamos \n"
+        +"4. Estadisticas y Reportes \n"
+        +"5. Salir");
     }
 }
     
