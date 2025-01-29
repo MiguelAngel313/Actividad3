@@ -6,27 +6,29 @@ public class Biblioteca {
         Scanner teclado = new Scanner(System.in);
         GestionUsuarios gestor = new GestionUsuarios();
 
-        //Crear usuarios
+        // Crear usuarios
         Usuario admin = new Usuario("Administrador", "admn@example.com", "admn1234", true);
         Usuario usuario1 = new Usuario("Carla Leon", "carla@example.com", "contrasenia1", false);
         Usuario usuario2 = new Usuario("Ana Lopez", "ana@example.com", "contrasenia2", false);
         Usuario usuario3 = new Usuario("Juan Gomez", "juan@example.com", "contrasenia3", false);
 
-        //Crear libros
-        Libro libro1=new Libro(01, "El quijote", "Miguel De Cervantes", 789, "Ficcion", false, 0);
-        ArrayList<Libro> libros=new ArrayList<Libro>();
+        // Libro de prueba
+        Libro libro1 = new Libro(01, "El quijote", "Miguel De Cervantes", 789, "Ficcion", false, 0);
+        ArrayList<Libro> libros = new ArrayList<Libro>();
         libros.add(libro1);
 
-        //Registrar administrador 
+        // Registrar administrador
         gestor.nuevoUsuario(admin);
 
-        //Menú
+        // Menú
+        mostrarMenu(admin, libros);
+
         boolean continuar = true;
         while (continuar) {
-            mostrarMenu(admin, libros);
+
             int opcion = obtenerOpcion(teclado);
 
-            //Registrar usuarios
+            // Registrar usuarios
             if (opcion == 1) {
                 if (gestor.registrarUsuario(usuario1, "admn@example.com", "admn1234")) {
                     System.out.println("El Usuario 1 esta registrado!");
@@ -55,7 +57,7 @@ public class Biblioteca {
                     System.out.println("No tienes permisos para consultar usuarios.");
                 }
             } else if (opcion == 3) {
-                //Salir del programa
+                // Salir del programa
                 System.out.println("Saliendo del programa... Chao!!");
                 continuar = false;
             } else {
@@ -66,18 +68,7 @@ public class Biblioteca {
         teclado.close();
     }
 
-    /*
-    Eliminar esta funcion
-    public static void mostrarMenu1() {
-        System.out.println("Menú Principal");
-        System.out.println("1) Registrar Usuarios");
-        System.out.println("2) Consultar Usuarios");
-        System.out.println("3) Salir");
-        System.out.print("Seleccione una opción: ");
-    }
-     */
-
-    //Leer la opción seleccionada por el usuario
+    // Leer la opción seleccionada por el usuario
     public static int obtenerOpcion(Scanner teclado) {
         while (!teclado.hasNextInt()) {
             System.out.println("Inserte un número válido!.");
@@ -87,63 +78,62 @@ public class Biblioteca {
         return teclado.nextInt();
     }
 
-    public static void mostrarMenu(Usuario user, ArrayList<Libro> libros){
-        Scanner entrada=new Scanner(System.in);
-        int opcion=0;
-        while (opcion!=5) {
-            
+    public static void mostrarMenu(Usuario user, ArrayList<Libro> libros) {
+        Scanner entrada = new Scanner(System.in);
+        int opcion = 0;
+        while (opcion != 5) {
+
             System.out.println("Elige una opcion \n"
-            +"1. Gestionar Libros \n"
-            +"2. Gestionar Usuarios \n"
-            +"3. Gestionar Prestamos \n"
-            +"4. Estadisticas y Reportes \n"
-            +"5. Salir");
-            opcion=entrada.nextInt();
-            
+                    + "1. Gestionar Libros \n"
+                    + "2. Gestionar Usuarios \n"
+                    + "3. Gestionar Prestamos \n"
+                    + "4. Estadisticas y Reportes \n"
+                    + "5. Salir");
+            opcion = entrada.nextInt();
+
             switch (opcion) {
                 case 1:
                     menuGestionarLibros(user, libros);
-                break;
-                    
+                    break;
+
                 case 2:
-                    
-                break;
+
+                    break;
 
                 case 3:
                     menuGestionarPrestamos(libros);
-                break;
+                    break;
 
                 case 4:
 
-                break;
+                    break;
 
                 case 5:
-                    System.out.println("Opcion elegida: \n"+ "SALIR");
-                break;
-                
+                    System.out.println("Opcion elegida: \n" + "SALIR");
+                    break;
+
                 default:
-                System.out.println("Opcion no valida.");
-                break;
+                    System.out.println("Opcion no valida.");
+                    break;
             }
         }
-        
+
     }
 
+    public static void menuGestionarLibros(Usuario user, ArrayList<Libro> libros) {
+        Scanner entrada = new Scanner(System.in);
+        int opcion = 0;
 
-    public static void menuGestionarLibros(Usuario user, ArrayList<Libro> libros){
-        Scanner entrada=new Scanner(System.in);
-        int opcion=0;
-
-        while (opcion!=5) {
-            GestionLibros gestor=new GestionLibros();
+        while (opcion != 5) {
+            GestionLibros gestor = new GestionLibros();
             System.out.println("Elige una opcion: \n"
-            +"1. Agregar libros nuevos (Admin) \n"
-            +"2. Eliminar libros existentes (Admin) \n"
-            +"3. Buscar libro por titulo, autor o categoria \n"
-            +"4. Mostrar todos los libros disponibles \n"
-            +"5. Volver a menu principal");
+                    + "1. Agregar libros nuevos (Admin) \n"
+                    + "2. Eliminar libros existentes (Admin) \n"
+                    + "3. Buscar libro por titulo, autor o categoria \n"
+                    + "4. Mostrar todos los libros disponibles \n"
+                    + "5. Volver a menu principal");
 
-            opcion=entrada.nextInt();
+            opcion = entrada.nextInt();
 
             switch (opcion) {
                 case 1:
@@ -151,7 +141,7 @@ public class Biblioteca {
                     break;
                 case 2:
                     System.out.println("Introduce un id del libro que desea eliminar:");
-                    int id=entrada.nextInt();
+                    int id = entrada.nextInt();
                     gestor.eliminarLibrosExistentes(user, id, libros);
                     break;
                 case 3:
@@ -159,45 +149,44 @@ public class Biblioteca {
                     break;
                 case 4:
                     gestor.todosLosLibros(libros);
-                break;
+                    break;
 
                 case 5:
                     System.out.println("Volviendo al menu principal...");
                     break;
-            
+
                 default:
-                System.out.println("Opcion no valida.");
+                    System.out.println("Opcion no valida.");
                     break;
             }
         }
-        
-    }
-    
 
-    public static void menuGestionarPrestamos(ArrayList<Libro> libros){
-        GestionPrestamos gestor=new GestionPrestamos();
-        Scanner entrada=new Scanner(System.in);
-        int opcion=0;
+    }
+
+    public static void menuGestionarPrestamos(ArrayList<Libro> libros) {
+        GestionPrestamos gestor = new GestionPrestamos();
+        Scanner entrada = new Scanner(System.in);
+        int opcion = 0;
         int id;
 
-        while (opcion!=4) {
+        while (opcion != 4) {
             System.out.println("Elige una opcion: \n"
-            +"1. Realizar prestamo de un libro \n"
-            +"2. Devolver libro prestado \n"
-            +"3. Mostrar libros prestados \n"
-            +"4. Volver al menu principal");
+                    + "1. Realizar prestamo de un libro \n"
+                    + "2. Devolver libro prestado \n"
+                    + "3. Mostrar libros prestados \n"
+                    + "4. Volver al menu principal");
 
-            opcion=entrada.nextInt();
+            opcion = entrada.nextInt();
 
             switch (opcion) {
                 case 1:
                     System.out.println("Introduce el id de libro que se va a prestar:");
-                    id=entrada.nextInt();
+                    id = entrada.nextInt();
                     gestor.realizarPrestamosLibros(libros, id);
                     break;
                 case 2:
                     System.out.println("Introduce el id del libro que desea devolver:");
-                    id=entrada.nextInt();
+                    id = entrada.nextInt();
                     gestor.devolverLibroPrestado(libros, id);
                     break;
                 case 3:
@@ -205,7 +194,7 @@ public class Biblioteca {
                     break;
                 case 4:
                     System.out.println("Volviendo al menu principal...");
-            
+
                 default:
                     System.out.println("Opcion no valida.");
                     break;
@@ -213,4 +202,3 @@ public class Biblioteca {
         }
     }
 }
-    
