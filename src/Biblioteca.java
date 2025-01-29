@@ -124,7 +124,7 @@ public class Biblioteca {
                 break;
             }
         }
-        entrada.close();
+        
     }
 
     //Continuar por esta funcion
@@ -168,7 +168,7 @@ public class Biblioteca {
                     break;
             }
         }
-        entrada.close();
+        
     }
 }
     
