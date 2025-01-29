@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
-public class GestionUsuarios {private ArrayList<Usuario> usuarios;
+public class GestionUsuarios {
+    
+    private ArrayList<Usuario> usuarios;
 
     public GestionUsuarios() {
         this.usuarios = new ArrayList<>();
