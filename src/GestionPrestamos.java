@@ -23,6 +23,14 @@ public void devolverLibroPrestado(ArrayList<Libro> libros, int id){
     }
 }
 
-//Implementar funcion de mostrar libros actualmente prestados
+
+public void mostrarLibrosPrestados(ArrayList<Libro> libros){
+
+    for (Libro libro : libros) {
+        if (libro.isPrestado()) {
+            System.out.println(libro.toString());
+        }
+    }
+}
 
 }
