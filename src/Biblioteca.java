@@ -66,7 +66,8 @@ public class Biblioteca {
         teclado.close();
     }
 
-    //Mostrar menú 
+    /*
+    Eliminar esta funcion
     public static void mostrarMenu1() {
         System.out.println("Menú Principal");
         System.out.println("1) Registrar Usuarios");
@@ -74,6 +75,7 @@ public class Biblioteca {
         System.out.println("3) Salir");
         System.out.print("Seleccione una opción: ");
     }
+     */
 
     //Leer la opción seleccionada por el usuario
     public static int obtenerOpcion(Scanner teclado) {
@@ -102,13 +104,13 @@ public class Biblioteca {
                 case 1:
                     menuGestionarLibros(user, libros);
                 break;
-                
+                    
                 case 2:
-                
+                    
                 break;
 
                 case 3:
-
+                    menuGestionarPrestamos(libros);
                 break;
 
                 case 4:
@@ -169,6 +171,46 @@ public class Biblioteca {
             }
         }
         
+    }
+    
+
+    public static void menuGestionarPrestamos(ArrayList<Libro> libros){
+        GestionPrestamos gestor=new GestionPrestamos();
+        Scanner entrada=new Scanner(System.in);
+        int opcion=0;
+        int id;
+
+        while (opcion!=4) {
+            System.out.println("Elige una opcion: \n"
+            +"1. Realizar prestamo de un libro \n"
+            +"2. Devolver libro prestado \n"
+            +"3. Mostrar libros prestados \n"
+            +"4. Volver al menu principal");
+
+            opcion=entrada.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("Introduce el id de libro que se va a prestar:");
+                    id=entrada.nextInt();
+                    gestor.realizarPrestamosLibros(libros, id);
+                    break;
+                case 2:
+                    System.out.println("Introduce el id del libro que desea devolver:");
+                    id=entrada.nextInt();
+                    gestor.devolverLibroPrestado(libros, id);
+                    break;
+                case 3:
+                    gestor.mostrarLibrosPrestados(libros);
+                    break;
+                case 4:
+                    System.out.println("Volviendo al menu principal...");
+            
+                default:
+                    System.out.println("Opcion no valida.");
+                    break;
+            }
+        }
     }
 }
     

@@ -10,6 +10,7 @@ public void realizarPrestamosLibros(ArrayList<Libro> libros, int id){
             vecesPrestado=libro.getNumVecesPrestado();
             libro.setPrestado(true);
             libro.setNumVecesPrestado(vecesPrestado++);
+            System.out.println("Libro prestado correctamente.");
         }
     }
 }
@@ -19,6 +20,7 @@ public void devolverLibroPrestado(ArrayList<Libro> libros, int id){
     for (Libro libro : libros) {
         if (libro.getIdLibro()==id && libro.isPrestado()==true) {
             libro.setPrestado(false);
+            System.out.println("Libro devuelto correctamente.");
         }
     }
 }
