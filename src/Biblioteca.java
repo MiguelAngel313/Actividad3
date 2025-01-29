@@ -127,7 +127,7 @@ public class Biblioteca {
         
     }
 
-    //Continuar por esta funcion
+
     public static void menuGestionarLibros(Usuario user, ArrayList<Libro> libros){
         Scanner entrada=new Scanner(System.in);
         int opcion=0;
