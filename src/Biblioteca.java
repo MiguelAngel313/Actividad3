@@ -39,6 +39,7 @@ public class Biblioteca {
        
     }
 
+    //Funciones---------------------------------------------------
   
 
     public static Usuario inicioDeSesion(ArrayList<Usuario> users){
@@ -47,7 +48,7 @@ public class Biblioteca {
         Usuario user=null;
         boolean inicio=false;
         while (!inicio) {
-            System.out.println("Inicio de Sesion \n"+"    ----    \n"+"Introduce un nombre de usuario:");
+            System.out.println("    Inicio de Sesion \n"+"          ---- \n"+"Introduce un nombre de usuario:");
             name=entrada.next();
             System.out.println("Introduce una contrasenia:");
             passwd=entrada.next();
