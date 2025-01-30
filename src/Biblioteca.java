@@ -5,13 +5,16 @@ public class Biblioteca {
     public static void main(String[] args) throws Exception {
         Scanner teclado = new Scanner(System.in);
         GestionUsuarios gestor = new GestionUsuarios();
+        Usuario usuarioSeleccionado = null;
 
         // Crear usuarios
         Usuario admin = new Usuario("Administrador", "admn@example.com", "admn1234", true, 0);
         Usuario usuario1 = new Usuario("Carla_Leon", "carla@example.com", "contrasenia1", false, 0);
         Usuario usuario2 = new Usuario("Ana_Lopez", "ana@example.com", "contrasenia2", false, 0);
         Usuario usuario3 = new Usuario("Juan_Gomez", "juan@example.com", "contrasenia3", false, 0);
-        Usuario usuarioSeleccionado = null;
+        usuario1.setNumeroDePrestamosActivos(2);
+        usuario2.setNumeroDePrestamosActivos(0);
+        usuario3.setNumeroDePrestamosActivos(7);
 
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
         usuarios.add(admin);
@@ -26,6 +29,9 @@ public class Biblioteca {
         Libro libro1 = new Libro(1, "El_Quijote", "Miguel_De_Cervantes", 789, "Ficcion", false, 0);
         Libro libro2 = new Libro(2, "El_arte_de_la_guerra", "Tsun_Zu", 120, "Estrategia_militar", false, 0);
         Libro libro3 = new Libro(3, "Habitos_Atomicos", "James_Clear", 342, "Psicologia", false, 0);
+        libro1.setNumVecesPrestado(4);
+        libro2.setNumVecesPrestado(2);
+        libro3.setNumVecesPrestado(12);
         ArrayList<Libro> libros = new ArrayList<Libro>();
         libros.add(libro1);
         libros.add(libro2);
