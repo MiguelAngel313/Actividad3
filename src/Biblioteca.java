@@ -49,7 +49,7 @@ public class Biblioteca {
                 break;
 
                 case 3:
-                    menuGestionarPrestamos(libro, teclado);
+                    menuGestionarPrestamos(libros, teclado);
                     break;
 
                 case 4:

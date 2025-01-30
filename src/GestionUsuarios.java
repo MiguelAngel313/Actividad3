@@ -35,6 +35,16 @@ public class GestionUsuarios {
         return null;
         
     }
+    public Boolean eliminarUsuario(String correo){
+        for (Usuario u : usuarios) {
+            if (u.getEmail().equals(correo)) {
+                usuarios.remove(u);
+                return true;
+            }
+            
+        }
+        return false;
+    }
 }
 
 
