@@ -20,66 +20,14 @@ public class Biblioteca {
         // Registrar administrador
         gestor.nuevoUsuario(admin);
 
-        // Menú
-        mostrarMenu(admin, libros);
-
-        boolean continuar = true;
-        while (continuar) {
-
-            int opcion = obtenerOpcion(teclado);
-
-            // Registrar usuarios
-            if (opcion == 1) {
-                if (gestor.registrarUsuario(usuario1, "admn@example.com", "admn1234")) {
-                    System.out.println("El Usuario 1 esta registrado!");
-                } else {
-                    System.out.println("Error al registrar Usuario 1!!!");
-                }
-
-                if (gestor.registrarUsuario(usuario2, "admn@example.com", "admin1234")) {
-                    System.out.println("El Usuario 2 esta registrado!");
-                } else {
-                    System.out.println("Error al registrar Usuario 2!!!");
-                }
-
-                if (gestor.registrarUsuario(usuario3, "admn@example.com", "admin1234")) {
-                    System.out.println("El Usuario 3 esta registrado!");
-                } else {
-                    System.out.println("Error al registrar Usuario 3!!!");
-                }
-
-            } else if (opcion == 2) {
-                // Consultar usuarios registrados (como administrador)
-                String usuarios = gestor.consultarUsuarios("admn@example.com", "admn1234");
-                if (usuarios != null) {
-                    System.out.println("Usuarios registrados:\n" + usuarios);
-                } else {
-                    System.out.println("No tienes permisos para consultar usuarios.");
-                }
-            } else if (opcion == 3) {
-                // Salir del programa
-                System.out.println("Saliendo del programa... Chao!!");
-                continuar = false;
-            } else {
-                System.out.println("Opción no válida, por favor intentelo de nuevo.");
-            }
-        }
-
+        // Menú Principal
+        mostrarMenu(admin, libros, gestor, teclado);
         teclado.close();
     }
+    
 
-    // Leer la opción seleccionada por el usuario
-    public static int obtenerOpcion(Scanner teclado) {
-        while (!teclado.hasNextInt()) {
-            System.out.println("Inserte un número válido!.");
-            teclado.next();
-        }
-
-        return teclado.nextInt();
-    }
-
-    public static void mostrarMenu(Usuario user, ArrayList<Libro> libros) {
-        Scanner entrada = new Scanner(System.in);
+    public static void mostrarMenu(Usuario user, ArrayList<Libro> libros, GestionUsuarios gestor, Scanner teclado) {
+    
         int opcion = 0;
         while (opcion != 5) {
 
@@ -89,20 +37,19 @@ public class Biblioteca {
                     + "3. Gestionar Prestamos \n"
                     + "4. Estadisticas y Reportes \n"
                     + "5. Salir");
-            opcion = entrada.nextInt();
+            opcion = teclado.nextInt();
 
             switch (opcion) {
                 case 1:
-                    menuGestionarLibros(user, libros);
-
+                    menuGestionarLibros(user, libros, teclado);
                 break;
                 
                 case 2: //crear funcion de usuario
-                
+                    menuGestionarUsuarios(gestor, teclado);
                 break;
 
                 case 3:
-                    menuGestionarPrestamos(libros);
+                    menuGestionarPrestamos(libro, teclado);
                     break;
 
                 case 4:
@@ -121,12 +68,12 @@ public class Biblioteca {
 
     }
 
-    public static void menuGestionarLibros(Usuario user, ArrayList<Libro> libros) {
-        Scanner entrada = new Scanner(System.in);
+    public static void menuGestionarLibros(Usuario user, ArrayList<Libro> libros, Scanner teclado) {
+        GestionLibros gestor = new GestionLibros();
         int opcion = 0;
 
         while (opcion != 5) {
-            GestionLibros gestor = new GestionLibros();
+
             System.out.println("Elige una opcion: \n"
                     + "1. Agregar libros nuevos (Admin) \n"
                     + "2. Eliminar libros existentes (Admin) \n"
@@ -134,7 +81,7 @@ public class Biblioteca {
                     + "4. Mostrar todos los libros disponibles \n"
                     + "5. Volver a menu principal");
 
-            opcion = entrada.nextInt();
+            opcion = teclado.nextInt();
 
             switch (opcion) {
                 case 1:
@@ -142,7 +89,7 @@ public class Biblioteca {
                     break;
                 case 2:
                     System.out.println("Introduce un id del libro que desea eliminar:");
-                    int id = entrada.nextInt();
+                    int id = teclado.nextInt();
                     gestor.eliminarLibrosExistentes(user, id, libros);
                     break;
                 case 3:
@@ -164,9 +111,9 @@ public class Biblioteca {
 
     }
 
-    public static void menuGestionarPrestamos(ArrayList<Libro> libros) {
+    public static void menuGestionarPrestamos(ArrayList<Libro> libros, Scanner teclado) {
         GestionPrestamos gestor = new GestionPrestamos();
-        Scanner entrada = new Scanner(System.in);
+        
         int opcion = 0;
         int id;
 
@@ -177,17 +124,17 @@ public class Biblioteca {
                     + "3. Mostrar libros prestados \n"
                     + "4. Volver al menu principal");
 
-            opcion = entrada.nextInt();
+            opcion = teclado.nextInt();
 
             switch (opcion) {
                 case 1:
                     System.out.println("Introduce el id de libro que se va a prestar:");
-                    id = entrada.nextInt();
+                    id = teclado.nextInt();
                     gestor.realizarPrestamosLibros(libros, id);
                     break;
                 case 2:
                     System.out.println("Introduce el id del libro que desea devolver:");
-                    id = entrada.nextInt();
+                    id = teclado.nextInt();
                     gestor.devolverLibroPrestado(libros, id);
                     break;
                 case 3:
@@ -203,4 +150,86 @@ public class Biblioteca {
         }
     }
     //Crear aqui la funcion de gestion de Usuario.
+    public static void menuGestionarUsuarios(GestionUsuarios gestor, Scanner teclado) {
+
+        int opcion = 0;
+        while (opcion != 4) {
+            System.out.println("Elige una opción: \n"
+                    + "1. Registrar un nuevo usuario \n"
+                    + "2. Eliminar un usuario \n"
+                    + "3. Consultar usuarios registrados \n"
+                    + "4. Volver al menú principal");
+    
+            opcion = obtenerOpcion(teclado);
+            teclado.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("Ingrese el nombre del nuevo usuario: ");
+                    String nombre = teclado.nextLine();
+    
+                    System.out.println("Ingrese el correo electrónico: ");
+                    String email = teclado.nextLine();
+    
+                    System.out.println("Ingrese una contrasenia: ");
+                    String contrasena = teclado.nextLine();
+    
+                    System.out.println("¿Es administrador? ");
+                    boolean esAdmin = teclado.nextBoolean();
+
+                    Usuario nuevoUsuario = new Usuario(nombre, email, contrasena, esAdmin);
+                    gestor.nuevoUsuario(nuevoUsuario);
+                    System.out.println("El usuario fue registrado correctamente");
+
+                break;
+
+            case 2:
+                System.out.println("Ingrese el correo electrónico del usuario a eliminar:");
+                String correoEliminar = teclado.nextLine();
+
+                if (gestor.eliminarUsuario(correoEliminar)) {
+                    System.out.println("Usuario eliminado! ");
+                } else {
+                    System.out.println("No se encuentra el usuario!! ");
+                }
+                break;
+
+            case 3:
+                System.out.println("Ingrese su correo de administrador:");
+                String correoAdmin = teclado.nextLine();
+
+                System.out.println("Ingrese su contraseña de administrador:");
+                String claveAdmin = teclado.nextLine();
+
+                String listaUsuarios = gestor.consultarUsuarios(correoAdmin, claveAdmin);
+                if (listaUsuarios != null) {
+                    System.out.println("Usuarios registrados:\n" + listaUsuarios);
+                } else {
+                    System.out.println("No tiene permisos para consultar usuarios.");
+                }
+                break;
+
+            case 4:
+                System.out.println("Volviendo al menú principal...");
+                break;
+
+            default:
+                System.out.println("Opción no válida, inténtelo de nuevo.");
+                break;
+        }
+    }
+    
 }
+
+ // Leer la opción seleccionada por el usuario
+ public static int obtenerOpcion(Scanner teclado) {
+    while (!teclado.hasNextInt()) {
+        System.out.println("Inserte un número válido!.");
+        teclado.next();
+    }
+
+    return teclado.nextInt();
+}
+
+}
+
