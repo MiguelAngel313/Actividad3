@@ -81,7 +81,7 @@ public class Biblioteca {
                     + "3. Gestionar Prestamos \n"
                     + "4. Estadisticas y Reportes \n"
                     + "5. Salir");
-            opcion = teclado.nextInt();
+            opcion = entrada.nextInt();
 
             switch (opcion) {
                 case 1:
@@ -155,6 +155,7 @@ public class Biblioteca {
 
     public static void menuGestionarPrestamos(ArrayList<Libro> libros, ArrayList<Usuario> users) {
         GestionPrestamos gestor = new GestionPrestamos();
+        Scanner entrada = new Scanner();
         
         int opcion = 0;
         int id;
@@ -166,7 +167,7 @@ public class Biblioteca {
                     + "3. Mostrar libros prestados \n"
                     + "4. Volver al menu principal");
 
-            opcion = teclado.nextInt();
+            opcion = entrada.nextInt();
 
             switch (opcion) {
                 case 1:
