@@ -44,7 +44,7 @@ public class Biblioteca {
                     menuGestionarLibros(user, libros, teclado);
                 break;
                 
-                case 2: //crear funcion de usuario
+                case 2: 
                     menuGestionarUsuarios(gestor, teclado);
                 break;
 
