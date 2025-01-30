@@ -29,9 +29,9 @@ public class GestionLibros {
     }
 
     public void eliminarLibrosExistentes(Usuario user, ArrayList<Libro> libros) {
-        Scanner entrada=new Scanner(System.in);
+        Scanner entrada = new Scanner(System.in);
         System.out.println("Introduce un id del libro que desea eliminar:");
-                    int id = entrada.nextInt();
+        int id = entrada.nextInt();
         if (user.isAdmin()) {
 
             for (Libro libro : libros) {
