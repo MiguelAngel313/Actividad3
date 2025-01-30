@@ -8,10 +8,10 @@ public class Biblioteca {
         
 
         // Crear usuarios
-        Usuario admin = new Usuario("Administrador", "admn@example.com", "admn1234", true);
-        Usuario usuario1 = new Usuario("Carla Leon", "carla@example.com", "contrasenia1", false);
-        Usuario usuario2 = new Usuario("Ana Lopez", "ana@example.com", "contrasenia2", false);
-        Usuario usuario3 = new Usuario("Juan Gomez", "juan@example.com", "contrasenia3", false);
+        Usuario admin = new Usuario("Administrador", "admn@example.com", "admn1234", true,0);
+        Usuario usuario1 = new Usuario("Carla_Leon", "carla@example.com", "contrasenia1", false,0);
+        Usuario usuario2 = new Usuario("Ana_Lopez", "ana@example.com", "contrasenia2", false,0);
+        Usuario usuario3 = new Usuario("Juan_Gomez", "juan@example.com", "contrasenia3", false,0);
         Usuario usuarioSeleccionado=null;
 
         ArrayList<Usuario> usuarios=new ArrayList<Usuario>();
@@ -34,7 +34,7 @@ public class Biblioteca {
 
 
         // Menú
-        mostrarMenu(usuarioSeleccionado, libros);
+        mostrarMenu(usuarioSeleccionado, libros, usuarios);
 
        
     }
@@ -69,7 +69,7 @@ public class Biblioteca {
         return user;
     }
 
-    public static void mostrarMenu(Usuario user, ArrayList<Libro> libros) {
+    public static void mostrarMenu(Usuario user, ArrayList<Libro> libros, ArrayList<Usuario> users) {
         Scanner entrada = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 5) {
@@ -92,7 +92,7 @@ public class Biblioteca {
                     break;
 
                 case 3:
-                    menuGestionarPrestamos(libros);
+                    menuGestionarPrestamos(libros, users);
                     break;
 
                 case 4:
@@ -152,7 +152,7 @@ public class Biblioteca {
 
     }
 
-    public static void menuGestionarPrestamos(ArrayList<Libro> libros) {
+    public static void menuGestionarPrestamos(ArrayList<Libro> libros, ArrayList<Usuario> users) {
         GestionPrestamos gestor = new GestionPrestamos();
         Scanner entrada = new Scanner(System.in);
         int opcion = 0;
@@ -171,12 +171,13 @@ public class Biblioteca {
                 case 1:
                     System.out.println("Introduce el id de libro que se va a prestar:");
                     id = entrada.nextInt();
-                    gestor.realizarPrestamosLibros(libros, id);
+                    gestor.realizarPrestamosLibros(libros, id, users);
+
                     break;
                 case 2:
                     System.out.println("Introduce el id del libro que desea devolver:");
                     id = entrada.nextInt();
-                    gestor.devolverLibroPrestado(libros, id);
+                    gestor.devolverLibroPrestado(libros, id, users);
                     break;
                 case 3:
                     gestor.mostrarLibrosPrestados(libros);
