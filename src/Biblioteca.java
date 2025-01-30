@@ -103,7 +103,7 @@ public class Biblioteca {
                     menuGestionarLibros(user, libros);
                 break;
                 
-                case 2:
+                case 2: //crear funcion de usuario
                 
                 break;
 
@@ -170,5 +170,6 @@ public class Biblioteca {
         }
         
     }
+    //Crear aqui la funcion de gestion de Usuario.
 }
     
