@@ -84,7 +84,7 @@ public class Biblioteca {
 
             switch (opcion) {
                 case 1:
-                    menuGestionarLibros(user, libros, teclado);
+                    menuGestionarLibros(user, libros);
                 break;
                 
                 case 2: 
