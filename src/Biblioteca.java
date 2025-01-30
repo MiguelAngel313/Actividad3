@@ -26,72 +26,20 @@ public class Biblioteca {
         
 
         // Libro de prueba
-        Libro libro1 = new Libro(01, "El quijote", "Miguel De Cervantes", 789, "Ficcion", false, 0);
-        Libro libro2=new Libro(02, "El arte de la guerra", "Tsun Zu", 120, "Estrategia militar", false, 0);
+        Libro libro1 = new Libro(1, "El_quijote", "Miguel_De_Cervantes", 789, "Ficcion", false, 0);
+        Libro libro2=new Libro(2, "El_arte_de_la_guerra", "Tsun_Zu", 120, "Estrategia_militar", false, 0);
         ArrayList<Libro> libros = new ArrayList<Libro>();
         libros.add(libro1);
         libros.add(libro2);
 
-        // Registrar administrador
-        //gestor.nuevoUsuario(admin);
 
         // Menú
         mostrarMenu(usuarioSeleccionado, libros);
 
-        boolean continuar = true;
-        while (continuar) {
-
-            int opcion = obtenerOpcion(teclado);
-
-            // Registrar usuarios
-            if (opcion == 1) {
-                if (gestor.registrarUsuario(usuario1, "admn@example.com", "admn1234")) {
-                    System.out.println("El Usuario 1 esta registrado!");
-                } else {
-                    System.out.println("Error al registrar Usuario 1!!!");
-                }
-
-                if (gestor.registrarUsuario(usuario2, "admn@example.com", "admin1234")) {
-                    System.out.println("El Usuario 2 esta registrado!");
-                } else {
-                    System.out.println("Error al registrar Usuario 2!!!");
-                }
-
-                if (gestor.registrarUsuario(usuario3, "admn@example.com", "admin1234")) {
-                    System.out.println("El Usuario 3 esta registrado!");
-                } else {
-                    System.out.println("Error al registrar Usuario 3!!!");
-                }
-
-            } else if (opcion == 2) {
-                // Consultar usuarios registrados (como administrador)
-                String usuarios1 = gestor.consultarUsuarios("admn@example.com", "admn1234");
-                if (usuarios != null) {
-                    System.out.println("Usuarios registrados:\n" + usuarios);
-                } else {
-                    System.out.println("No tienes permisos para consultar usuarios.");
-                }
-            } else if (opcion == 3) {
-                // Salir del programa
-                System.out.println("Saliendo del programa... Chao!!");
-                continuar = false;
-            } else {
-                System.out.println("Opción no válida, por favor intentelo de nuevo.");
-            }
-        }
-
-        teclado.close();
+       
     }
 
-    // Leer la opción seleccionada por el usuario
-    public static int obtenerOpcion(Scanner teclado) {
-        while (!teclado.hasNextInt()) {
-            System.out.println("Inserte un número válido!.");
-            teclado.next();
-        }
-
-        return teclado.nextInt();
-    }
+  
 
     public static Usuario inicioDeSesion(ArrayList<Usuario> users){
         Scanner entrada=new Scanner(System.in);
@@ -183,9 +131,7 @@ public class Biblioteca {
                     gestor.agregarLibrosNuevos(user, libros);
                     break;
                 case 2:
-                    System.out.println("Introduce un id del libro que desea eliminar:");
-                    int id = entrada.nextInt();
-                    gestor.eliminarLibrosExistentes(user, id, libros);
+                    gestor.eliminarLibrosExistentes(user, libros);
                     break;
                 case 3:
                     gestor.buscarLibro(libros);

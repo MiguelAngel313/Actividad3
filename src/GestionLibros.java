@@ -14,27 +14,30 @@ public class GestionLibros {
             libro.setIdLibro(entrada.nextInt());
 
             System.out.println("Introduce un Titulo:");
-            libro.setTitulo(entrada.nextLine());
+            libro.setTitulo(entrada.next());
 
             System.out.println("Introduce un autor");
-            libro.setAutor(entrada.nextLine());
+            libro.setAutor(entrada.next());
 
             System.out.println("Introduce un numero de paginas:");
             libro.setNumeroPaginas(entrada.nextInt());
 
             System.out.println("Introduce una categoria:");
-            libro.setCategoria(entrada.nextLine());
+            libro.setCategoria(entrada.next());
             libros.add(libro);
         }
     }
 
-    public void eliminarLibrosExistentes(Usuario user, int idLibro, ArrayList<Libro> libros) {
-
+    public void eliminarLibrosExistentes(Usuario user, ArrayList<Libro> libros) {
+        Scanner entrada=new Scanner(System.in);
+        System.out.println("Introduce un id del libro que desea eliminar:");
+                    int id = entrada.nextInt();
         if (user.isAdmin()) {
 
             for (Libro libro : libros) {
-                if (libro.getIdLibro() == idLibro) {
-                    libro = null;
+                if (libro.getIdLibro() == id) {
+                    libros.remove(libro);
+                    break;
                 }
 
             }
