@@ -5,23 +5,38 @@ public class Biblioteca {
     public static void main(String[] args) throws Exception {
         Scanner teclado = new Scanner(System.in);
         GestionUsuarios gestor = new GestionUsuarios();
+        
 
         // Crear usuarios
         Usuario admin = new Usuario("Administrador", "admn@example.com", "admn1234", true);
         Usuario usuario1 = new Usuario("Carla Leon", "carla@example.com", "contrasenia1", false);
         Usuario usuario2 = new Usuario("Ana Lopez", "ana@example.com", "contrasenia2", false);
         Usuario usuario3 = new Usuario("Juan Gomez", "juan@example.com", "contrasenia3", false);
+        Usuario usuarioSeleccionado=null;
+
+        ArrayList<Usuario> usuarios=new ArrayList<Usuario>();
+        usuarios.add(admin);
+        usuarios.add(usuario1);
+        usuarios.add(usuario2);
+        usuarios.add(usuario3);
+
+        //Inicio de sesion
+        usuarioSeleccionado=inicioDeSesion(usuarios);
+
+        
 
         // Libro de prueba
         Libro libro1 = new Libro(01, "El quijote", "Miguel De Cervantes", 789, "Ficcion", false, 0);
+        Libro libro2=new Libro(02, "El arte de la guerra", "Tsun Zu", 120, "Estrategia militar", false, 0);
         ArrayList<Libro> libros = new ArrayList<Libro>();
         libros.add(libro1);
+        libros.add(libro2);
 
         // Registrar administrador
-        gestor.nuevoUsuario(admin);
+        //gestor.nuevoUsuario(admin);
 
         // Menú
-        mostrarMenu(admin, libros);
+        mostrarMenu(usuarioSeleccionado, libros);
 
         boolean continuar = true;
         while (continuar) {
@@ -50,7 +65,7 @@ public class Biblioteca {
 
             } else if (opcion == 2) {
                 // Consultar usuarios registrados (como administrador)
-                String usuarios = gestor.consultarUsuarios("admn@example.com", "admn1234");
+                String usuarios1 = gestor.consultarUsuarios("admn@example.com", "admn1234");
                 if (usuarios != null) {
                     System.out.println("Usuarios registrados:\n" + usuarios);
                 } else {
@@ -76,6 +91,34 @@ public class Biblioteca {
         }
 
         return teclado.nextInt();
+    }
+
+    public static Usuario inicioDeSesion(ArrayList<Usuario> users){
+        Scanner entrada=new Scanner(System.in);
+        String name,passwd;
+        Usuario user=null;
+        boolean inicio=false;
+        while (!inicio) {
+            System.out.println("Inicio de Sesion \n"+"    ----    \n"+"Introduce un nombre de usuario:");
+            name=entrada.next();
+            System.out.println("Introduce una contrasenia:");
+            passwd=entrada.next();
+
+            for (Usuario usuario : users) {
+                if (usuario.getNombre().equalsIgnoreCase(name) && usuario.getContrasenia().equalsIgnoreCase(passwd)) {
+                    user=usuario;
+                    inicio=true;
+                    break;
+                }
+            }
+            if (inicio) {
+                System.out.println("Sesion iniciada correctamente.");
+            }
+            else{
+                System.out.println("Usuario o contrasenia no validos.");
+            }
+        }
+        return user;
     }
 
     public static void mostrarMenu(Usuario user, ArrayList<Libro> libros) {
@@ -137,7 +180,7 @@ public class Biblioteca {
 
             switch (opcion) {
                 case 1:
-                    gestor.agregarLibrosNuevos(user);
+                    gestor.agregarLibrosNuevos(user, libros);
                     break;
                 case 2:
                     System.out.println("Introduce un id del libro que desea eliminar:");
