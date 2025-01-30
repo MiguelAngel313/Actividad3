@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class GestionLibros {
 
-    public Libro agregarLibrosNuevos(Usuario user) {
+    public void agregarLibrosNuevos(Usuario user, ArrayList<Libro> libros) {
         if (user.isAdmin()) {
 
             Scanner entrada = new Scanner(System.in);
@@ -24,36 +24,36 @@ public class GestionLibros {
 
             System.out.println("Introduce una categoria:");
             libro.setCategoria(entrada.next());
-            entrada.close();
-            return libro;
-        } else {
-            return null;
+            libros.add(libro);
         }
     }
 
-    public ArrayList<Libro> eliminarLibrosExistentes(Usuario user, int idLibro, ArrayList<Libro> libros) {
-
+    public void eliminarLibrosExistentes(Usuario user, ArrayList<Libro> libros) {
+        Scanner entrada=new Scanner(System.in);
+        System.out.println("Introduce un id del libro que desea eliminar:");
+                    int id = entrada.nextInt();
         if (user.isAdmin()) {
 
             for (Libro libro : libros) {
-                if (libro.getIdLibro() == idLibro) {
+                if (libro.getIdLibro() == id) {
                     libros.remove(libro);
+                    break;
                 }
+
             }
         }
-        return libros;
     }
 
-    public void buscarLibro(ArrayList <Libro> libros){
-        Scanner entrada=new Scanner(System.in);
+    public void buscarLibro(ArrayList<Libro> libros) {
+        Scanner entrada = new Scanner(System.in);
         System.out.println("Elige el valor por el que  quieres buscar el libro: \n"
-        +"1. Titulo \n"+"2. Autor \n"+"3. Categoria \n"+"Elige una opcion:");
-        int opcion=entrada.nextInt();
+                + "1. Titulo \n" + "2. Autor \n" + "3. Categoria \n" + "Elige una opcion:");
+        int opcion = entrada.nextInt();
 
-        switch(opcion){
+        switch (opcion) {
             case 1:
-            System.out.println("Introduce un titulo:");
-            String titulo=entrada.next();
+                System.out.println("Introduce un titulo:");
+                String titulo = entrada.next();
                 for (Libro libro : libros) {
                     if (titulo.equalsIgnoreCase(libro.getTitulo())) {
                         System.out.println(libro.toString());
@@ -62,31 +62,30 @@ public class GestionLibros {
                 break;
             case 2:
                 System.out.println("Introduce un autor:");
-                String autor=entrada.next();
+                String autor = entrada.next();
                 for (Libro libro : libros) {
                     if (autor.equalsIgnoreCase(libro.getAutor())) {
                         System.out.println(libro.toString());
                     }
                 }
-            break;
+                break;
             case 3:
                 System.out.println("Introduce una categoria:");
-                String categoria=entrada.next();
+                String categoria = entrada.next();
                 for (Libro libro : libros) {
                     if (categoria.equalsIgnoreCase(libro.getCategoria())) {
                         System.out.println(libro.toString());
                     }
                 }
-            break;
+                break;
 
             default:
-            System.out.println("Esa opcion no es valida:");
+                System.out.println("Esa opcion no es valida:");
 
         }
-        entrada.close();
     }
 
-    public void todosLosLibros(ArrayList<Libro> libros){
+    public void todosLosLibros(ArrayList<Libro> libros) {
         for (Libro libro : libros) {
             System.out.println(libro.toString());
         }

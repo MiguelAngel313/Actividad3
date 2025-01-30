@@ -5,29 +5,72 @@ public class Biblioteca {
     public static void main(String[] args) throws Exception {
         Scanner teclado = new Scanner(System.in);
         GestionUsuarios gestor = new GestionUsuarios();
+        
 
         // Crear usuarios
-        Usuario admin = new Usuario("Administrador", "admn@example.com", "admn1234", true);
-        Usuario usuario1 = new Usuario("Carla Leon", "carla@example.com", "contrasenia1", false);
-        Usuario usuario2 = new Usuario("Ana Lopez", "ana@example.com", "contrasenia2", false);
-        Usuario usuario3 = new Usuario("Juan Gomez", "juan@example.com", "contrasenia3", false);
+        Usuario admin = new Usuario("Administrador", "admn@example.com", "admn1234", true,0);
+        Usuario usuario1 = new Usuario("Carla_Leon", "carla@example.com", "contrasenia1", false,0);
+        Usuario usuario2 = new Usuario("Ana_Lopez", "ana@example.com", "contrasenia2", false,0);
+        Usuario usuario3 = new Usuario("Juan_Gomez", "juan@example.com", "contrasenia3", false,0);
+        Usuario usuarioSeleccionado=null;
+
+        ArrayList<Usuario> usuarios=new ArrayList<Usuario>();
+        usuarios.add(admin);
+        usuarios.add(usuario1);
+        usuarios.add(usuario2);
+        usuarios.add(usuario3);
+
+        //Inicio de sesion
+        usuarioSeleccionado=inicioDeSesion(usuarios);
+
+        
 
         // Libro de prueba
-        Libro libro1 = new Libro(01, "El quijote", "Miguel De Cervantes", 789, "Ficcion", false, 0);
+        Libro libro1 = new Libro(1, "El_quijote", "Miguel_De_Cervantes", 789, "Ficcion", false, 0);
+        Libro libro2=new Libro(2, "El_arte_de_la_guerra", "Tsun_Zu", 120, "Estrategia_militar", false, 0);
         ArrayList<Libro> libros = new ArrayList<Libro>();
         libros.add(libro1);
+        libros.add(libro2);
 
-        // Registrar administrador
-        gestor.nuevoUsuario(admin);
 
-        // Menú Principal
-        mostrarMenu(admin, libros, gestor, teclado);
-        teclado.close();
+        // Menú
+        mostrarMenu(usuarioSeleccionado, libros, usuarios);
+
+       
     }
-    
 
-    public static void mostrarMenu(Usuario user, ArrayList<Libro> libros, GestionUsuarios gestor, Scanner teclado) {
-    
+  
+
+    public static Usuario inicioDeSesion(ArrayList<Usuario> users){
+        Scanner entrada=new Scanner(System.in);
+        String name,passwd;
+        Usuario user=null;
+        boolean inicio=false;
+        while (!inicio) {
+            System.out.println("Inicio de Sesion \n"+"    ----    \n"+"Introduce un nombre de usuario:");
+            name=entrada.next();
+            System.out.println("Introduce una contrasenia:");
+            passwd=entrada.next();
+
+            for (Usuario usuario : users) {
+                if (usuario.getNombre().equalsIgnoreCase(name) && usuario.getContrasenia().equalsIgnoreCase(passwd)) {
+                    user=usuario;
+                    inicio=true;
+                    break;
+                }
+            }
+            if (inicio) {
+                System.out.println("Sesion iniciada correctamente.");
+            }
+            else{
+                System.out.println("Usuario o contrasenia no validos.");
+            }
+        }
+        return user;
+    }
+
+    public static void mostrarMenu(Usuario user, ArrayList<Libro> libros, ArrayList<Usuario> users) {
+        Scanner entrada = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 5) {
 
@@ -49,7 +92,7 @@ public class Biblioteca {
                 break;
 
                 case 3:
-                    menuGestionarPrestamos(libros, teclado);
+                    menuGestionarPrestamos(libros, users);
                     break;
 
                 case 4:
@@ -85,12 +128,10 @@ public class Biblioteca {
 
             switch (opcion) {
                 case 1:
-                    gestor.agregarLibrosNuevos(user);
+                    gestor.agregarLibrosNuevos(user, libros);
                     break;
                 case 2:
-                    System.out.println("Introduce un id del libro que desea eliminar:");
-                    int id = teclado.nextInt();
-                    gestor.eliminarLibrosExistentes(user, id, libros);
+                    gestor.eliminarLibrosExistentes(user, libros);
                     break;
                 case 3:
                     gestor.buscarLibro(libros);
@@ -111,7 +152,7 @@ public class Biblioteca {
 
     }
 
-    public static void menuGestionarPrestamos(ArrayList<Libro> libros, Scanner teclado) {
+    public static void menuGestionarPrestamos(ArrayList<Libro> libros, ArrayList<Usuario> users) {
         GestionPrestamos gestor = new GestionPrestamos();
         
         int opcion = 0;
@@ -129,13 +170,14 @@ public class Biblioteca {
             switch (opcion) {
                 case 1:
                     System.out.println("Introduce el id de libro que se va a prestar:");
-                    id = teclado.nextInt();
-                    gestor.realizarPrestamosLibros(libros, id);
+                    id = entrada.nextInt();
+                    gestor.realizarPrestamosLibros(libros, id, users);
+
                     break;
                 case 2:
                     System.out.println("Introduce el id del libro que desea devolver:");
-                    id = teclado.nextInt();
-                    gestor.devolverLibroPrestado(libros, id);
+                    id = entrada.nextInt();
+                    gestor.devolverLibroPrestado(libros, id, users);
                     break;
                 case 3:
                     gestor.mostrarLibrosPrestados(libros);
