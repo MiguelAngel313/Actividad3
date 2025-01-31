@@ -97,7 +97,10 @@ public class Biblioteca {
                     break;
 
                 case 4:
-
+                    EstadisticasReportes estadisticas = new EstadisticasReportes();
+                    estadisticas.mostrarPrestamosTotalesyActivos(libros, users);
+                    estadisticas.mostrarLibrosMasPrestados(libros);
+                    estadisticas.usuarioMasPrestamosActivos(users);
                     break;
 
                 case 5:
