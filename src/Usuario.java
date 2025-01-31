@@ -63,11 +63,9 @@ public void setNumeroDePrestamosActivos(int numeroDePrestamosActivos) {
 
 @Override
 public String toString() {
-    return "{" +
-        " nombre='" + nombre + "'" +
-        ", email='" + email + "'" +
-        ", contrasenia='" + contrasenia + "'" +
-        ", isAdmin='" + isAdmin + "'" +
-        "}";
+    return "Usuario [nombre=" + nombre + ", email=" + email + ", contrasenia=" + contrasenia + ", isAdmin=" + isAdmin
+            + ", numeroDePrestamosActivos=" + numeroDePrestamosActivos + "]";
 }
+
+
 }
