@@ -12,9 +12,9 @@ public class GestionUsuarios {
         usuarios.add(usuario);
     }
 
-    public boolean registrarUsuario(Usuario usuario, String adminEmail, String adminContrasenia) {
+    public boolean registrarUsuario(Usuario usuario) {
         for (Usuario u : usuarios) {
-            if (u.getEmail().equals(adminEmail) && u.getContrasenia().equals(adminContrasenia) && u.isAdmin()) {
+            if (u.isAdmin()) {
                 usuarios.add(usuario);
                 return true;
             }
@@ -22,9 +22,9 @@ public class GestionUsuarios {
         return false;
     }
 
-    public String consultarUsuarios(String adminEmail, String adminContrasenia) {
+    public String consultarUsuarios(Usuario usuario) {
         for (Usuario u : usuarios) {
-            if (u.getEmail().equals(adminEmail) && u.getContrasenia().equals(adminContrasenia) && u.isAdmin()) {
+            if (u.isAdmin()) {
                 StringBuilder sb = new StringBuilder();
                 for (Usuario user : usuarios) {
                     sb.append(user.toString()).append("\n");
@@ -35,7 +35,19 @@ public class GestionUsuarios {
         return null;
         
     }
+
+    public boolean eliminarUsuario(String nombreUsuario) {
+        for (Usuario u : usuarios) {
+            if (u.getNombre().equals(nombreUsuario)) {
+                usuarios.remove(u);
+                return true; 
+            }
+        }
+        return false; 
+    }
 }
+
+
 
 
     

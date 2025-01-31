@@ -89,7 +89,7 @@ public class Biblioteca {
                     break;
 
                 case 2:
-
+                    menuGestionarUsuarios(user, users);
                     break;
 
                 case 3:
@@ -191,5 +191,66 @@ public class Biblioteca {
                     break;
             }
         }
+    }
+
+        public static void menuGestionarUsuarios(Usuario user, ArrayList<Usuario> usuario) {
+            Scanner teclado = new Scanner(System.in);
+            GestionUsuarios gestor = new GestionUsuarios();
+            int opcion = 0;
+            while (opcion != 4) {
+                System.out.println("Elige una opción: \n"
+                        + "1. Registrar un nuevo usuario \n"
+                        + "2. Eliminar un usuario \n"
+                        + "3. Consultar usuarios registrados \n"
+                        + "4. Volver al menú principal");
+        
+                opcion = teclado.nextInt();
+             
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Introduce el nuevo nombre de usuario: ");
+                        String nombre = teclado.next();
+                        System.out.println("Introduce el correo electrónico: ");
+                        String correo = teclado.next();
+                        System.out.println("Introduce la contraseña: ");
+                        String contrasenia = teclado.next();
+        
+                        //Nuevo Usuario
+                        Usuario nuevoUsuario = new Usuario(nombre, correo, contrasenia, false, 0);
+                        gestor.nuevoUsuario(nuevoUsuario);
+                        System.out.println("Usuario registrado!! ");
+                        break;
+        
+                    case 2:
+                        System.out.println("Ingrese el nombre del usuario a eliminar: ");
+                        String nombreUsuario = teclado.next();
+        
+                        if (gestor.eliminarUsuario(nombreUsuario)) {
+                            System.out.println("Usuario eliminado exitosamente. ");
+                        } else {
+                            System.out.println("Usuario no encontrado. ");
+                        }
+                        break;
+        
+                    case 3:
+                        String listaUsuarios = gestor.consultarUsuarios(user);
+                        if (listaUsuarios != null) {
+                            System.out.println("Usuarios registrados: \n" + listaUsuarios);
+                        } else {
+                            System.out.println("No tienes permisos para ver los usuarios.");
+                        }
+                        break;
+        
+                    case 4:
+                        System.out.println("Volviendo al menú principal...");
+                        break;
+        
+                    default:
+                        System.out.println("Opción no válida.");
+                        break;
+                }
+            }
+
+        
     }
 }
